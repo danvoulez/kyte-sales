@@ -1,10 +1,9 @@
-
 name: Deploy Kyte Module
 
 on:
   push:
     paths:
-      - my-kyte-clone-deploy-ready.zip
+      - my-kyte-clone-deploy-ready%202.zip
 
 jobs:
   extract-and-deploy:
@@ -16,7 +15,7 @@ jobs:
       - name: Extract kyte_sales zip
         uses: ihiroky/extract-action@v1
         with:
-          file_path: ./my-kyte-clone-deploy-ready.zip
+          file_path: ./my-kyte-clone-deploy-ready%202.zip
           extract_dir: ./modules/kyte_sales
 
       - name: Setup Node.js
