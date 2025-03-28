@@ -1,0 +1,36 @@
+
+name: Deploy Kyte Module
+
+on:
+  push:
+    paths:
+      - my-kyte-clone-deploy-ready.zip
+
+jobs:
+  extract-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract kyte_sales zip
+        uses: ihiroky/extract-action@v1
+        with:
+          file_path: ./my-kyte-clone-deploy-ready.zip
+          extract_dir: ./modules/kyte_sales
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./modules/kyte_sales
+        run: npm install
+
+      - name: Build project
+        working-directory: ./modules/kyte_sales
+        run: npm run build
+
+      - name: Success
+        run: echo "Kyte Clone extraído e construído com sucesso!"
